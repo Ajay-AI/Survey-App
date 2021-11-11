@@ -1,0 +1,18 @@
+.survey{
+    margin: 50px;
+}
+.formPage{
+    margin: 0px 50px;
+}
+.form-row{
+    width: 70%;
+}
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+  }
+  
+.example-radio-button {
+    margin: 10px;
+  }

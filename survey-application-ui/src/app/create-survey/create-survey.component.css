@@ -1,0 +1,52 @@
+.form-row{
+    margin:0px 10px;
+    width: 40%;
+}
+#stepper{
+    width: 100%
+}
+.form-row-choices{
+    margin:0px 10px;
+    text-align:center;
+    width: 100%;
+}
+.form-row-choices .search-part {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+ }
+.container{
+   margin: 10px;
+   padding-top: 10px;
+}
+.formPage{
+    margin: 0px 20px;
+    width: 100%;
+}
+.page{
+    background-color: rgb(253, 249, 241);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 10px 30px 0px;
+}
+.option-row{
+    width: 20%;
+    margin-left: 10px;
+}
+button{
+    display:block;
+}
+.remove-button{
+    display: inline;
+    position:absolute;
+     top:0;
+     right:0;
+}
+.remove-button:hover{
+    background-color: rgb(224, 71, 71);
+    color: rgba(255, 255, 255, 0.829);
+}
+.question{
+    margin: 20px;
+    background-color: rgb(248, 234, 209);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 10px 30px 0px;
+}

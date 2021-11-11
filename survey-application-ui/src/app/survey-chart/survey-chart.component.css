@@ -1,0 +1,5 @@
+#chart, #bar{
+    max-width: 40%;
+    display: inline-block;
+    margin-left: 10%;
+}

@@ -1,0 +1,51 @@
+{
+    "questions": [
+        {
+            "name": "What is your first name?",
+            "type": "Text",
+            "choices": [],
+            "questionID": 1
+        },
+        {
+            "name": "What is your Last name?",
+            "type": "Text",
+            "choices": [],
+            "questionID": 2
+        },
+        {
+            "name": "Enter your favorite color",
+            "type": "Text",
+            "choices": [],
+            "questionID": 3
+        },
+        {
+            "name": "Where do you want to work?",
+            "type": "Dropdown",
+            "choices": [
+                {
+                    "choice_id": 1,
+                    "value": "Mumbai"
+                },
+                {
+                    "choice_id": 2,
+                    "value": "Bangalore"
+                },
+                {
+                    "choice_id": 3,
+                    "value": "Delhi"
+                },
+                {
+                    "choice_id": 4,
+                    "value": "Chennai"
+                },
+                {
+                    "choice_id": 5,
+                    "value": "Pune"
+                }
+            ],
+            "questionID": 4
+        }
+    ],
+    "surveyName": "Preffered Location",
+    "surveyID": 1
+}

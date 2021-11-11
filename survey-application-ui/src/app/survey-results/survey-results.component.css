@@ -1,0 +1,17 @@
+.output{
+    margin:10%;
+    width: 80%;
+}
+table{
+    width: 100%;
+}
+.title{
+    margin:10px;
+    margin-top: 30px;
+    background-color: rgb(225, 241, 155);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 10px 30px 0px;
+}
+th{
+    font-size: medium;
+    font-weight: 500;
+}

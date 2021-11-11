@@ -1,0 +1,35 @@
+<div *ngIf="loaded" class="survey">
+  <h1>{{Root.surveyName}} Survey</h1>
+  <mat-stepper #stepper>
+    <div *ngFor="let page of Root.pages; let i = index;">
+      <mat-step [stepControl]="form" >
+        <form class="formPage">
+          <ng-template matStepLabel>{{page.page_description}}</ng-template>
+          <div class="formContainer" *ngFor="let question of page.questions" [formGroup]="form">
+            <mat-radio-group id="question.question_id" class="example-radio-group" *ngIf="question.type==='RADIO'" [formControlName]="question.question_id">
+              <mat-label id="question.question_id">{{question.name}}</mat-label>
+              <mat-radio-button class="example-radio-button" *ngFor="let opt of question.choices" [value]="opt.value">{{opt.value}}</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field *ngIf="question.type!='RADIO'" class="form-row">
+              <mat-label [attr.for]="question.question_id">{{question.name}}</mat-label>
+              <div [ngSwitch]="question.type">
+                <input matInput *ngSwitchCase="'TEXT'" id="question.question_id" [type]="question.type"
+                  [formControlName]="question.question_id">
+
+                <mat-select id="question.question_id" *ngSwitchCase="'DROPDOWN'" [formControlName]="question.question_id">
+                  <mat-option *ngFor="let opt of question.choices" [value]="opt.value">{{opt.value}}</mat-option>
+                </mat-select>
+                <textarea matInput id="question.question_id" *ngSwitchCase="'TEXTAREA'" [formControlName]="question.question_id"></textarea>
+              </div>
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-button matStepperPrevious *ngIf="i!=0">Back</button>
+            <button mat-button matStepperNext *ngIf="i!=(Root.pages.length-1)">Next</button>
+            <button mat-button (click)="onSubmit()" *ngIf="i==(Root.pages.length-1) && Root.survey_status!=='SAVED'">Submit</button>
+          </div>
+        </form>
+      </mat-step>
+    </div>
+  </mat-stepper>
+</div>

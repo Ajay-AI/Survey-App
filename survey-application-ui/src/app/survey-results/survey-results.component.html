@@ -1,0 +1,28 @@
+<div *ngIf="loaded" class="output">
+    <table class="mat-elevation-z8" mat-table matTableExporter [dataSource]="data" #exporter="matTableExporter" >
+        <div *ngFor="let field of displayedColumns;" >
+            <ng-container [matColumnDef]="field">
+                <th mat-header-cell *matHeaderCellDef> {{field}} </th>
+                <td mat-cell *matCellDef="let element"> {{element[field]}} </td>
+            </ng-container>
+        </div>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="9999">
+              <b>No Responses have been received yet.</b>
+            </td>
+        </tr> 
+    </table>
+    <button mat-raised-button (click)="exporter.exportTable('csv',{fileName:'survey_data'})">Download CSV</button>
+    <div *ngFor="let k of objectKeys(chartData)" >
+        <mat-card class="title">
+            {{this.questions[k]}}
+        </mat-card>
+        <sa-survey-chart  [chartData]="chartData[k]"></sa-survey-chart>
+    </div>
+</div>
+
+
+
+

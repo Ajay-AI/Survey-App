@@ -1,0 +1,23 @@
+.output{
+    margin:5%;
+    width: 90%;
+}
+table{
+    width: 100%;
+}
+button{
+    margin: 10px;
+}
+th{
+    background-color: #683ab7e1;
+    color: white;
+    font-size: larger;
+}
+tr{
+    background-color: whitesmoke;
+}
+.result{
+
+    float: right;
+
+}

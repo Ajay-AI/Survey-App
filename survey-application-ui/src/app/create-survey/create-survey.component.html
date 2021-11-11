@@ -1,0 +1,68 @@
+
+<div class="container">
+    <h1>Survey Builder</h1>
+    <form [formGroup]="form">
+        <mat-form-field class="form-row">
+            <mat-label>Survey Name</mat-label>
+            <input matInput type="text" [formControlName]="'surveyName'">
+        </mat-form-field>
+        <mat-stepper [@.disabled] = "true" #stepper>
+            <div  *ngFor="let page_id of objectKeys(Pages)">
+                <mat-step class="formPage" [stepControl]="form">
+                    <mat-card class="page">
+                        <mat-form-field class="form-row">
+                            <mat-label>Page Description</mat-label>
+                            <input matInput type="text" [formControlName]="page_id">
+                        </mat-form-field>
+                        <div *ngFor="let ques_id of objectKeys(Questions);">
+                            <mat-card *ngIf="Questions[ques_id]===page_id" class="question">
+                                <mat-form-field class="form-row">
+                                    <mat-label>Question title</mat-label>
+                                    <input matInput type="text" [formControlName]="ques_id">
+                                </mat-form-field>
+                                <mat-form-field class="form-row">
+                                    <mat-label>Type</mat-label>
+                                    <mat-select [formControlName]="ques_id+'_type'">
+                                        <mat-option *ngFor="let opt of types" [value]="opt">{{opt}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <div class="form-row-choices" *ngIf="form.get(ques_id+'_type')?.value==='DROPDOWN'">
+                                    <div  *ngFor="let choice_id of objectKeys(Choices); ">
+                                        <div  class="search-part" *ngIf="Choices[choice_id]===ques_id">
+                                            <mat-form-field>
+                                                <mat-label>Option</mat-label>
+                                                <input matInput type="text" [formControlName]="choice_id">
+                                            </mat-form-field>
+                                            <button mat-button matSuffix class="remove-choice" (click)="removeChoice(choice_id)"><span class="material-icons">remove</span></button>
+                                        </div>
+                                    </div>
+                                    <button mat-button matSuffix (click)="addChoice(ques_id)">Add Option</button>
+                                </div>
+                                <div class="form-row-choices" *ngIf="form.get(ques_id+'_type')?.value==='RADIO'">
+                                    <div  *ngFor="let choice_id of objectKeys(Choices); ">
+                                        <div  class="search-part" *ngIf="Choices[choice_id]===ques_id">
+                                            <mat-form-field>
+                                                <mat-label>Option</mat-label>
+                                                <input matInput type="text" [formControlName]="choice_id">
+                                            </mat-form-field>
+                                            <button mat-button matSuffix class="remove-choice" (click)="removeChoice(choice_id)"><span class="material-icons">remove</span></button>
+                                        </div>
+                                    </div>
+                                    <button mat-button matSuffix (click)="addChoice(ques_id)">Add Option</button>
+                                </div>
+                                <button class="remove-button" (click)="removeQuestion(ques_id)" mat-button color='warn'><span class="material-icons">clear</span></button>
+                            </mat-card>
+                        </div>
+                        <button mat-button (click)="addQuestion(page_id)">Add new question</button>
+                        <button class="remove-button" (click)="removePage(page_id)" mat-button color='warn'><span class="material-icons">clear</span></button>
+                    </mat-card>
+                    
+                </mat-step>
+
+            </div>
+        </mat-stepper>
+        <button mat-button (click)="addPage()">Add a page</button>
+
+    </form>
+    <button mat-raised-button color = 'primary'(click)="saveSurvey()">Save</button>
+</div>

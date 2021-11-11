@@ -1,0 +1,47 @@
+<div *ngIf="loaded" class="output">
+    <table class="mat-elevation-z8" mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter" >
+        <div *ngFor="let field of displayedColumns; last as isLast; let i = index;">
+            <ng-container [matColumnDef]="field" *ngIf="!isLast">
+                <th mat-header-cell *matHeaderCellDef> {{title[i]}} </th>
+                <td mat-cell *matCellDef="let element"> {{element[field]}} </td>    
+            </ng-container>
+        </div>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row" >
+                <div *ngIf="row.survey_status==='ACTIVE'">
+                    <button mat-raised-button (click)="state(row)" color = "warn" [hidden]="!adminAccess">Stop</button>
+                    <button mat-raised-button (click)="surveyform(row.surveyID)" color = "primary" [hidden]="adminAccess||submitted[row.surveyID]">Go to Survey</button>
+                    <button mat-raised-button [hidden]="!submitted[row.surveyID]" [disabled]="true">Submitted</button>
+                    <button mat-raised-button (click)="results(row.surveyID)" class='result' color = "accent" [hidden]="!adminAccess">Results</button>
+                    <button mat-button [disabled]="true" (click)="edit(row.surveyID)" class='result' ><span class="material-icons" [hidden]="!adminAccess">edit</span></button>
+                </div>
+                <div *ngIf="row.survey_status==='SAVED'">
+                    <button mat-raised-button (click)="openDialog(row)" color = "primary" [hidden]="!adminAccess">Make Live</button>
+                    <button mat-raised-button  (click)="surveyform(row.surveyID)" color = "primary">Preview</button>
+                    <button mat-raised-button (click)="results(row.surveyID)" class='result' color = "accent" [hidden]="!adminAccess">Results</button>
+                    <button mat-button (click)="edit(row.surveyID)" class='result'><span class="material-icons" [hidden]="!adminAccess">edit</span></button>
+                </div>
+                <div *ngIf="row.survey_status==='INACTIVE'">
+                    <button mat-raised-button (click)="state(row)" color = "primary" [hidden]="!adminAccess">Make Live</button>
+                    <button mat-raised-button [disabled]="true" (click)="surveyform(row.surveyID)" color = "primary" [hidden]="adminAccess||submitted[row.surveyID]">Go to Survey</button>
+                    <button mat-raised-button (click)="results(row.surveyID)" class='result'color = "accent" [hidden]="!adminAccess">Results</button>
+                    <button mat-button [disabled]="true" (click)="edit(row.surveyID)" class='result'><span class="material-icons" [hidden]="!adminAccess">edit</span></button>
+
+                </div>
+            </td>
+        </ng-container>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="9999">
+              <b>No survey has been assigned to you.</b>
+            </td>
+          </tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    
+    <button mat-raised-button class='create' (click)="create()" color = "accent" [hidden]="!adminAccess">Create Survey</button>
+    
+</div>
+
+
